@@ -1,14 +1,22 @@
+import { First_Name, Middl_eName, last_Name, Employee_Id1 } from "cypress/support/helper/constents";
+
 class AddEmployee {
   elements = {
-    firstname: () => cy.get('input[name="firstName"]'),
-    middlename: () => cy.get('input[name="middleName"]'),
-    lastname: () => cy.get('input[name="lastName"]'),
+    firstName: () => cy.get('input[placeholder="First Name"]'),
+    middleName: () => cy.get('input[placeholder="Middle Name"]'),
+    lastName: () => cy.get('input[placeholder="Last Name"]', {timeout:50000}),
+    employeeId: () => cy.get('input[placeholder="Employee Id"]'),
+    savebtn: () => cy.get('button[type="submit"]'),
   }
 
   addemployee() {
-    this.elements.firstname().type("Rahaf");
-    this.elements.middlename().type("Omar");
-    this.elements.lastname().type("Anabosi");
+    this.elements.firstName().clear().type(First_Name);
+    this.elements.middleName().clear().type(Middl_eName);
+    this.elements.lastName().clear().type(last_Name);
+    this.elements.employeeId().clear().type(Employee_Id1);
+    this.elements.savebtn().should('be.enabled').click();
+    cy.contains(First_Name).should('exist'); // تأكيد إنه انحفظ
   }
 }
 export default AddEmployee;
+
