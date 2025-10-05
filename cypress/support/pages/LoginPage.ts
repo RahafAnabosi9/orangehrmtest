@@ -1,15 +1,17 @@
-import { ADMIN_PASSWORD, ADMIN_USER  } from "cypress/support/helper/constents"
+//import { ADMIN_PASSWORD, ADMIN_USER  } from "cypress/support/helper/constents"
+
 class LoginPage {
-    element= {
+    element = {
         userName: () => cy.get('input[name="username"]'),
         password: () => cy.get('input[name="password"]'),
         loginBtn: () => cy.get('button[type="submit"]'),
     }
-    
-    login() {
-        this.element.userName() .type(ADMIN_USER);
-        this.element.password() .type(ADMIN_PASSWORD);
-        this.element.loginBtn() .click();
+
+
+    login(userName, password) {
+        this.element.userName().type(userName);
+        this.element.password().type(password);
+        this.element.loginBtn().click();
 
     }
 
