@@ -6,6 +6,6 @@ export const Middl_eName = 'Omar';
 export const last_Name = 'Anabosi';
 export const Employee_Id1 = '0461';
 
-export const Employee_Name = 'Rahaf Omar Anabosi';
+export const Employee_Name = 'Rahaf';
 export const Employee_Id = '0461';
 
