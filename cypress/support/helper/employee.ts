@@ -1,14 +1,15 @@
 class Employee {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  employeeId: number;
 
-    firstName: string;
-    middleName: string;
-    lastName: string;
-
-    constructor(First_Name: string, Middle_Name: string, last_Name: string) {
-        this.firstName = First_Name;
-        this.middleName = Middle_Name;
-        this.lastName = last_Name;
-
-    }
-
+  constructor(firstName: string, middleName: string, lastName: string, employeeId: number) {
+    this.firstName = firstName;
+    this.middleName = middleName;
+    this.lastName = lastName;
+    this.employeeId = employeeId;
+  }
 }
+
+export default Employee;

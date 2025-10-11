@@ -6,5 +6,5 @@
       "types": ["cypress", "node"],
       "baseUrl": "./"
     },
-    "include": ["**/*.ts"]
+    "include": ["**/*.ts", "cypress/support/helper/Employee.js"]
   }

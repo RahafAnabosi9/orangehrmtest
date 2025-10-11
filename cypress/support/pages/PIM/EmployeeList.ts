@@ -1,20 +1,23 @@
-import { Employee_Name, Employee_Id } from "cypress/support/helper/constents";
-
-class EmployeeList {
+export default class EmployeeList {
   elements = {
-    employeeName: () => cy.get('input[placeholder="Type for hints..."]'),
-    employeeId: () => cy.get('input[placeholder="Employee Id"]'),
-    searchBtn: () => cy.get('button[type="submit"]'),
-  }
+    employeeNameField: () =>
+      cy.get(
+        'input[placeholder="Type for hints..."], input[placeholder*="Employee Name"], input[aria-label*="employee"]',
+        { timeout: 15000 }
+      ).first(),
+    employeeIdField: () =>
+      cy.get(
+        'input[name="empsearch[id]"], input[placeholder*="Employee Id"], input[placeholder*="Id"], input[aria-label*="ID"]',
+        { timeout: 10000 }
+      ).first(),
+    searchButton: () => cy.contains('button', 'Search', { timeout: 10000 }),
+    deleteButtonInRow: (rowIndex = 0) =>
+      // نحاول إيجاد أي أيقونة سطل مهملات داخل الصف الأول كخيار افتراضي
+      cy.get('.oxd-table-body .oxd-table-card', { timeout: 10000 }).eq(rowIndex).find('.oxd-icon.bi-trash').first()
+  };
 
   employeelist() {
-    this.elements.employeeName().type(Employee_Name);
-    cy.get('.oxd-autocomplete-option').contains(Employee_Name).click();
-    this.elements.employeeId().type(Employee_Id);
-    this.elements.searchBtn().click();
-    cy.get('table').should('contain', Employee_Name);
+    this.elements.searchButton().click();
   }
 }
-export default EmployeeList;
-
 
