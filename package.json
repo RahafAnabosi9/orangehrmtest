@@ -18,6 +18,7 @@
     "@shelex/cypress-allure-plugin": "^2.41.1",
     "cypress": "^14.3.3",
     "cypress-cucumber-preprocessor": "^4.3.1",
+    "cypress-plugin-api": "^2.11.2",
     "eslint": "^9.26.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-cypress": "^4.3.0",

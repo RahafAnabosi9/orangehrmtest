@@ -3,8 +3,9 @@
       "target": "es5",
       "lib": ["es5", "dom"],
       "sourceMap": true,
-      "types": ["cypress", "node"],
+      "types": ["cypress", "node","cypress-plugin-api"],
       "baseUrl": "./"
+
     },
     "include": ["**/*.ts", "cypress/support/helper/Employee.js"]
   }

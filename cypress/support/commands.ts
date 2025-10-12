@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+import 'cypress-plugin-api'
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -11,7 +12,13 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('login', (userName: string, passWord: string) => {
+  cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+  cy.get('input[name="username"]').type(userName);
+  cy.get('input[name="password"]').type(passWord);
+  cy.get('button[type="submit"]').click();
+  cy.contains('Dashboard').should('be.visible')
+  })
 //
 //
 // -- This is a child command --
@@ -24,14 +31,13 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
+ declare global {
+ namespace Cypress {
+   interface Chainable {
+      login(username: string, password: string): Chainable<void>
 //       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
 //       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
 //       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+    }
+  }
+}
