@@ -1,59 +1,64 @@
-export default class AddEmployee {
+class AddEmployee {
+
   elements = {
-    // نستخدم مجموعة selectors احتياطية لأن الـ DOM قد يختلف بين نسخ الواجهة
-    firstName: () =>
-      cy.get(
-        'input[name="firstName"], input[placeholder*="First"], input[aria-label*="First"]',
-        { timeout: 15000 }
-      ).first(),
-    middleName: () =>
-      cy.get(
-        'input[name="middleName"], input[placeholder*="Middle"], input[aria-label*="Middle"]',
-        { timeout: 15000 }
-      ).first(),
-    lastName: () =>
-      cy.get(
-        'input[name="lastName"], input[placeholder*="Last"], input[aria-label*="Last"]',
-        { timeout: 15000 }
-      ).first(),
-    // selector مرن للـ employee id (يحاول name أو placeholder أو aria-label)
-    employeeId: () =>
-      cy.get(
-        'input[name="employeeId"], input[placeholder*="Employee"], input[placeholder*="Id"], input[aria-label*="Employee"]',
-        { timeout: 10000 }
-      ).first(),
-    saveButton: () => cy.contains('button', 'Save', { timeout: 10000 })
+    searchSide: {
+      searchInput: () => cy.get('input[placeholder="Type for hints..."]').first(),
+      searchButton: () => cy.get('button[type="submit"]').filter(':visible').first(),
+      tableBody: () => cy.get('div.oxd-table-body'),
+      secondRowTrashIcon: () => cy.get('.oxd-table-row').eq(1).find('.oxd-icon.bi-trash'),
+      confirmDeleteBtn: () => cy.get('button.oxd-button--label-danger').contains('Yes, Delete'),
+    },
+    addSide: {
+      addButton: () => cy.contains('button', 'Add'),
+      firstNameInput: () => cy.get('input[placeholder="First Name"]'),
+      lastNameInput: () => cy.get('input[placeholder="Last Name"]'),
+      employeeIdInput: () => cy.get('input.oxd-input.oxd-input--active').eq(3),
+      createLoginDetailsCheckbox: () => cy.get('input[type="checkbox"]').first(),
+      usernameInput: () => cy.get('.oxd-input[autocomplete="off"]').eq(0),
+      passwordInput: () => cy.get('.oxd-input[autocomplete="off"]').eq(1),
+      confirmPasswordInput: () => cy.get('.oxd-input[autocomplete="off"]').eq(2),
+      saveButton: () => cy.contains('button', 'Save'),
+      employeeFullNameLabel: (fullName: string) => cy.contains(fullName, { timeout: 10000 }),
+    },
   };
 
-  save() {
-    // نضغط زر الحفظ بطريقة موثوقة
-    this.elements.saveButton().should('be.visible').click();
+  addNewEmployee(
+    username: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+    employeeId: string,
+    fullName: string
+  ) {
+    cy.contains('PIM').click();
+    cy.contains('Employee List').click();
+
+    this.elements.searchSide.searchInput().type(username);
+    this.elements.searchSide.searchButton().click();
+
+    this.elements.searchSide.tableBody().then($body => {
+      if ($body.find('.oxd-table-row').length >= 2) {
+        this.elements.searchSide.secondRowTrashIcon().should('be.visible').click();
+        this.elements.searchSide.confirmDeleteBtn().click();
+        cy.wait(2000);
+      }
+    });
+
+    this.elements.addSide.addButton().click();
+
+    this.elements.addSide.firstNameInput().type(firstName);
+    this.elements.addSide.lastNameInput().type(lastName);
+    this.elements.addSide.employeeIdInput().clear().type(employeeId);
+    this.elements.addSide.createLoginDetailsCheckbox().check({ force: true });
+
+    this.elements.addSide.usernameInput().type(username);
+    this.elements.addSide.passwordInput().type(password);
+    this.elements.addSide.confirmPasswordInput().type(password);
+
+    this.elements.addSide.saveButton().click();
+
+    this.elements.addSide.employeeFullNameLabel(fullName).should('be.visible');
   }
 }
 
-
-
-
-
-
-/**import { First_Name, Middl_eName, last_Name, Employee_Id1 } from "cypress/support/helper/constents";
-
-class AddEmployee {
-  elements = {
-    firstName: () => cy.get('input[placeholder="First Name"]'),
-    middleName: () => cy.get('input[placeholder="Middle Name"]'),
-    lastName: () => cy.get('input[placeholder="Last Name"]'),
-   employeeId: () => cy.get('input[id*="employeeId"] ', {timeout:10000}), 
-    savebtn: () => cy.get('button[type="submit"]'),
-  }
-
-  addemployee(newEmployee: Employee) {
-   this.elements.firstName().clear().type(newEmployee.firstName);
-    this.elements.middleName().clear().type(newEmployee.middleName);
-    this.elements.lastName().clear().type(newEmployee.lastName);
-    this.elements.employeeId().clear().type(Employee_Id1);
-    this.elements.savebtn().should('be.enabled').click();
-    cy.contains(First_Name).should('exist');
-  }
-}
-export default AddEmployee;**/
+export default AddEmployee;
