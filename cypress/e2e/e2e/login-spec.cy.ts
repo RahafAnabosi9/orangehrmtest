@@ -62,19 +62,19 @@ describe('OrangeHRM Full Test Suite', () => {
 
     cy.contains('Add').click();
 
-    cy.get('input[placeholder="First Name"]').type('Raya');
-    cy.get('input[placeholder="Last Name"]').type('Salem');
+    cy.get('input[placeholder="First Name"]').type('Rahaf');
+    cy.get('input[placeholder="Last Name"]').type('Omar');
     cy.get('input.oxd-input.oxd-input--active').eq(3).type('12245');
 
     cy.get('input[type="checkbox"]').check({ force: true });
 
-    cy.get('.oxd-input').filter('[autocomplete="off"]').eq(0).type('rayassss');
+    cy.get('.oxd-input').filter('[autocomplete="off"]').eq(0).type('RahafO');
     cy.get('.oxd-input').filter('[autocomplete="off"]').eq(1).type('StrongPass123!');
     cy.get('.oxd-input').filter('[autocomplete="off"]').eq(2).type('StrongPass123!');
 
     cy.contains('Save').click();
 
-    cy.contains('Raya Salem', { timeout: 10000 }).should('be.visible');
+    cy.contains('Rahaf Omar', { timeout: 10000 }).should('be.visible');
   });
 
 });
