@@ -24,7 +24,7 @@ describe('OrangeHRM - Add Fixed Employees, Assign Leaves & Delete via API', () =
     cy.login('Admin', 'admin123'); // تسجيل الدخول كأدمن
   });
 
-  it('1️⃣ Add 5 employees via API', () => {
+  it(' Add 5 employees via API', () => {
     employees.forEach((emp) => {
       cy.api({
         method: 'POST',
@@ -39,7 +39,7 @@ describe('OrangeHRM - Add Fixed Employees, Assign Leaves & Delete via API', () =
       }).then((res) => {
         expect(res.status).to.eq(200);
         createdEmployeeIds.push(res.body.data.empNumber);
-        cy.log(`✅ Added employee ${emp.firstName} ${emp.lastName} (${res.body.data.empNumber})`);
+        cy.log(` Added employee ${emp.firstName} ${emp.lastName} (${res.body.data.empNumber})`);
       });
     });
   });
@@ -70,19 +70,19 @@ describe('OrangeHRM - Add Fixed Employees, Assign Leaves & Delete via API', () =
         url: '/web/index.php/api/v2/leave/leave-entitlements',
         body: {
           employee: { id: empId },
-          leaveType: { id: index + 1 }, // حسب ترتيب أنواع الإجازات
+          leaveType: { id: index + 1 }, 
           entitlement: 10 + index,
           fromDate: '2025-01-01',
           toDate: '2025-12-31'
         }
       }).then((res) => {
         expect(res.status).to.be.oneOf([200, 201]);
-        cy.log(`🏝️ Leave entitlement assigned for emp ${empId}`);
+        cy.log(` Leave entitlement assigned for emp ${empId}`);
       });
     });
   });
 
-  it('4️⃣ Delete all added employees', () => {
+  it('Delete all added employees', () => {
     createdEmployeeIds.forEach((empId) => {
       cy.api({
         method: 'DELETE',
