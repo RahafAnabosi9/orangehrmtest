@@ -48,9 +48,6 @@ describe('OrangeHRM - Add Employees + Assign & Apply Leave', () => {
      /** leavePage.openApplyLeave();
       leavePage.applyLeave(employee.leaveType);**/
 
-      
-      
- 
     });
   });
 });
