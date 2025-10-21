@@ -45,9 +45,7 @@ describe('OrangeHRM - Add Employees + Assign & Apply Leave', () => {
       leavePage.openAddEntitlements();
       leavePage.addEntitlement(employee.firstName, employee.leaveType, getLeaveDays(employee.leaveDays));
       leavePage.confirmAction();
-     /** leavePage.openApplyLeave();
-      leavePage.applyLeave(employee.leaveType);**/
-
+     
     });
   });
 });
