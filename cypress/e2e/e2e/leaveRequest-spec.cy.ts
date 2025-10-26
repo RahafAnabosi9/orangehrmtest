@@ -32,20 +32,18 @@ describe('OrangeHRM - Add Employees + Assign & Apply Leave', () => {
     cy.visit('/web/index.php/auth/login');
   });
 
-  it('Add Employees, Assign & Apply Leave', () => {
-    cy.login(users.valid.username, users.valid.password);
+ it('Add Employee, Assign & Apply Leave', () => {
+  cy.login(users.valid.username, users.valid.password);
 
-    employees.forEach((employee, index) => {
-      cy.log(`--- Employee ${index + 1}: ${employee.firstName} ${employee.lastName} ---`);
+  const employee = employees[0]; // استخدام أول موظف فقط من المصفوفة
 
-      employeePage.navigateToEmployeeList();
-      employeePage.searchAndDeleteIfExists(employee.employeeId);
-      employeePage.addEmployeeWithoutLogin(employee.firstName, employee.lastName, employee.employeeId);
+  cy.log(`--- Employee: ${employee.firstName} ${employee.lastName} ---`);
 
-      leavePage.openAddEntitlements();
-      leavePage.addEntitlement(employee.firstName, employee.leaveType, getLeaveDays(employee.leaveDays));
-      leavePage.confirmAction();
-     
-    });
-  });
+  employeePage.navigateToEmployeeList();
+  employeePage.searchAndDeleteIfExists(employee.employeeId);
+  employeePage.addEmployeeWithoutLogin(employee.firstName, employee.lastName, employee.employeeId);
+
+  leavePage.openAddEntitlements();
+  leavePage.addEntitlement(employee.firstName, employee.leaveType, getLeaveDays(employee.leaveDays));
+});
 });

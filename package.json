@@ -7,7 +7,10 @@
     "cypress:open": "cypress open",
     "clean": "rimraf cypress/videos cypress/screenshots",
     "lint": "eslint \"cypress/**/*.ts\" --fix",
-    "lint:check": "eslint \"cypress/**/*.ts\""
+    "lint:check": "eslint \"cypress/**/*.ts\"",
+    "cypress:info": "...",
+    "cypress:electron":"cypress run --browser electron .\\cypress\\e2e\\e2e\\login-spec.cy.ts"
+  
   },
   "author": "Malik.Mlitat",
   "license": "ISC",
@@ -29,4 +32,5 @@
     "rimraf": "^5.0.5",
     "typescript": "^5.8.2"
   }
+
 }

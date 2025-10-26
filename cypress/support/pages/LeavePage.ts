@@ -53,40 +53,13 @@ export default class LeavePage {
       }
     });
 
-    // التحقق الذكي من رسالة النجاح (مع إعادة محاولة)
-    cy.wait(1000);
-    cy.get('body').then(($body) => {
-      if ($body.find('.oxd-toast').length > 0) {
-        cy.get('.oxd-toast', { timeout: 20000 })
-          .should('exist')
-          .and('contain.text', 'Success');
-        cy.log('Toast appeared successfully');
-      } else {
-        cy.log('No toast found initially, retrying...');
-        cy.wait(2000);
-        cy.get('.oxd-toast', { timeout: 10000 })
-          .should('exist')
-          .and('contain.text', 'Success');
-      }
-    });
 
-    // تأكيد إضافي في حال بقي زر Confirm آخر
-    cy.wait(1000);
-    cy.get('body', { timeout: 10000 }).then(($body) => {
-      const confirmBtn = $body.find('button.oxd-button--secondary:contains("Confirm")');
-      if (confirmBtn.length > 0) {
-        cy.wrap(confirmBtn)
-          .should('be.visible')
-          .click({ force: true });
-        cy.log('Confirm button clicked at the end');
-      } else {
-        cy.log(' No Confirm button found at the end');
-      }
-    });
-  }
-   confirmAction() {
-    cy.contains('button', 'Confirm', { timeout: 10000 })
-      .should('be.visible')
-      .click({ force: true });
-  }
-}
+      cy.get('button.oxd-button.oxd-button--medium.oxd-button--secondary.orangehrm-button-margin', { timeout: 10000 })
+        .contains('Confirm')
+        .should('be.visible')
+        .click();
+
+      cy.contains('Successfully Saved', { timeout: 10000 }).should('be.visible');
+
+
+  }}
