@@ -17,26 +17,26 @@ describe('OrangeHRM Full Test Suite', () => {
   });
 
   it('should login with valid credentials', () => {
-    login.login(users.valid.username, users.valid.password);
+    login.performLogin(users.valid.username, users.valid.password);
     cy.url().should('include', '/dashboard');
     cy.contains('PIM').should('be.visible');
   });
 
   it('should fail with invalid password', () => {
-    login.login(users.invalidPassword.username, users.invalidPassword.password);
+    login.performLogin(users.invalidPassword.username, users.invalidPassword.password);
     cy.get('.oxd-alert-content-text').should('be.visible')
       .and('contain', 'Invalid credentials');
   });
 
   it('should fail with invalid username', () => {
-    login.login(users.invalidUsername.username, users.invalidUsername.password);
+    login.performLogin(users.invalidUsername.username, users.invalidUsername.password);
     cy.get('.oxd-alert-content-text').should('be.visible')
       .and('contain', 'Invalid credentials');
   });
 
   it('should delete second employee if exists, then add a new employee with login details', () => {
     // تسجيل الدخول باستخدام بيانات صالحة
-    login.login(users.valid.username, users.valid.password);
+    login.performLogin(users.valid.username, users.valid.password);
 
     cy.url().should('include', '/dashboard');
 

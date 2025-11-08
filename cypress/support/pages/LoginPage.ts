@@ -1,6 +1,24 @@
 class LoginPage {
 
   elements = {
+    userName: () => cy.get('input[name="username"]'),
+    passWord: () => cy.get('input[name="password"]'),
+    loginBtn: () => cy.get('button[type="submit"]')
+  }
+
+  login(username: string, password: string) {
+    this.elements.userName().type(username);
+    this.elements.passWord().type(password);
+    this.elements.loginBtn().click();
+  }
+
+}
+
+export default LoginPage;
+
+/**class LoginPage {
+
+  elements = {
     userName: () => cy.get('input[placeholder="Username"]'),
     passWord: () => cy.get('input[placeholder="Password"]'),
     loginBtn: () => cy.get('button[type="submit"]')
@@ -26,4 +44,4 @@ class LoginPage {
   }
 }
 
-export default LoginPage;
+export default LoginPage;*/
