@@ -9,8 +9,7 @@
     "lint": "eslint \"cypress/**/*.ts\" --fix",
     "lint:check": "eslint \"cypress/**/*.ts\"",
     "cypress:info": "...",
-    "cypress:electron":"cypress run --browser electron .\\cypress\\e2e\\e2e\\login-spec.cy.ts"
-  
+    "cypress:electron": "cypress run --browser electron .\\cypress\\e2e\\e2e\\login-spec.cy.ts"
   },
   "author": "Malik.Mlitat",
   "license": "ISC",
@@ -19,6 +18,7 @@
     "@eslint/js": "^9.26.0",
     "@faker-js/faker": "^10.1.0",
     "@shelex/cypress-allure-plugin": "^2.41.1",
+    "@testing-library/cypress": "^10.1.0",
     "cypress": "^14.3.3",
     "cypress-cucumber-preprocessor": "^4.3.1",
     "cypress-plugin-api": "^2.11.2",
@@ -32,5 +32,4 @@
     "rimraf": "^5.0.5",
     "typescript": "^5.8.2"
   }
-
 }

@@ -22,11 +22,11 @@ describe('Buzz Actions', () => {
         it(text.PostNamelang, () => {
 
 
-            // مراقبة POST و GET قبل أي تفاعل
+         
             cy.intercept('POST', '/web/index.php/api/v2/buzz/posts').as('postCreated');
             cy.intercept('GET', '/web/index.php/api/v2/buzz/feed*').as('feedReload');
 
-            // افتح صندوق الكتابة وانتظر ظهوره
+          
             cy.get(BuzzSelectors.POST_CONTAINER, { timeout: 10000 })
                 .should('be.visible')
                 .click();
@@ -40,21 +40,20 @@ describe('Buzz Actions', () => {
 
             cy.get(BuzzSelectors.POST_SUBMIT).click({ force: true });
 
-            //  لتأكيد نشر البوست
-            // cy.wait('@postCreated');
+            
             cy.wait('@feedReload', { timeout: 15000 });
 
-            // تأكد أن النص ظهر في 
+      
             cy.contains(text, { timeout: 20000 }).should('exist');
 
-            // Like #heart-svg
+            
             cy.get('#heart-svg', { timeout: 15000 })
                 .first()
                 .click({ force: true });
 
             cy.wait(1000);
 
-            // بعد الضغط، أعد query للزر وتأكد من تفعيل اللايك
+           
             cy.get('@#heart-svg', { timeout: 10000 })
                 .first()
                 .should('have.class', 'active');

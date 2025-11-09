@@ -76,5 +76,8 @@ describe('OrangeHRM Full Test Suite', () => {
 
     cy.contains('Rahaf Omar', { timeout: 10000 }).should('be.visible');
   });
-
+ it.only('should find url', () => {
+    
+    cy.findlink('OrangeHRM, Inc',"http://www.orangehrm.com");
+ });
 });

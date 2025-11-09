@@ -3,7 +3,7 @@
       "target": "es5",
       "lib": ["es5", "dom"],
       "sourceMap": true,
-      "types": ["cypress", "node","cypress-plugin-api"],
+      "types": ["cypress", "node","cypress-plugin-api","@testing-library/cypress"],
       "baseUrl": "./"
 
     },
